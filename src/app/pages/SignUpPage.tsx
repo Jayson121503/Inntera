@@ -171,103 +171,103 @@ export function SignUpPage() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">First Name</Label>
-                  <Input name="firstName" placeholder="John" value={formData.firstName} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">First Name</Label>
+                  <Input name="firstName" placeholder="e.g. Alexander" value={formData.firstName} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
                 </div>
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Last Name</Label>
-                  <Input name="lastName" placeholder="Doe" value={formData.lastName} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Email Address</Label>
-                <Input name="email" type="email" placeholder="john@example.com" value={formData.email} onChange={handleInputChange} 
-                  className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Phone Number</Label>
-                  <Input name="phone" placeholder="09123456789" value={formData.phone} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">City</Label>
-                  <Input name="city" placeholder="Butuan" value={formData.city} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Last Name</Label>
+                  <Input name="lastName" placeholder="e.g. Hamilton" value={formData.lastName} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Address</Label>
-                  <Input name="address" placeholder="123 Main St" value={formData.address} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+              <div className="space-y-1.5">
+                <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Email Address</Label>
+                <Input name="email" type="email" placeholder="alexander@inntera.com" value={formData.email} onChange={handleInputChange} 
+                  className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Phone Number</Label>
+                  <Input name="phone" placeholder="+63 9XX XXX XXXX" value={formData.phone} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
                 </div>
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Country</Label>
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">City</Label>
+                  <Input name="city" placeholder="Butuan City" value={formData.city} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Residential Address</Label>
+                  <Input name="address" placeholder="123 Elite Street" value={formData.address} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Country</Label>
                   <Input name="country" placeholder="Philippines" value={formData.country} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Secret Key</Label>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Secret Key</Label>
                   <div className="relative">
-                    <Input name="password" type={showPassword ? 'text' : 'password'} placeholder="••••" value={formData.password} onChange={handleInputChange} 
-                      className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all pr-8 font-bold px-3 text-xs border-2" />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-emerald-600 transition-colors">
-                      {showPassword ? <EyeOff size={12} /> : <Eye size={12} />}
+                    <Input name="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={formData.password} onChange={handleInputChange} 
+                      className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all pr-10 font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-300 hover:text-emerald-500 transition-colors">
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Confirm</Label>
-                  <Input name="confirmPassword" type={showPassword ? 'text' : 'password'} placeholder="••••" value={formData.confirmPassword} onChange={handleInputChange} 
-                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                <div className="space-y-1.5">
+                  <Label className="text-[9px] font-black uppercase tracking-widest text-stone-400 ml-1">Confirm Key</Label>
+                  <Input name="confirmPassword" type={showPassword ? 'text' : 'password'} placeholder="••••••••" value={formData.confirmPassword} onChange={handleInputChange} 
+                    className="bg-stone-50/50 border-stone-100 text-stone-900 h-11 rounded-xl focus:ring-0 focus:border-emerald-500/50 focus:bg-white transition-all font-medium px-4 text-sm border-2 placeholder:text-stone-300 shadow-sm" />
                 </div>
               </div>
 
               {Object.values(errors).some(e => e) && (
-                <div className="bg-red-50 border border-red-100 rounded-lg p-2 flex gap-2 animate-in fade-in slide-in-from-top-1">
-                  <AlertCircle className="w-3 h-3 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-[8px] text-red-700 font-bold leading-tight">{Object.values(errors).filter(e => e)[0]}.</p>
+                <div className="bg-rose-50 border border-rose-100 rounded-xl p-3 flex gap-3 animate-in fade-in slide-in-from-top-1">
+                  <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-[10px] text-rose-700 font-bold leading-tight">{Object.values(errors).filter(e => e)[0]}.</p>
                 </div>
               )}
 
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-10 bg-stone-900 hover:bg-black text-white font-black uppercase tracking-[0.2em] text-[9px] rounded-lg transition-all shadow-xl shadow-stone-900/20 mt-2 flex items-center justify-center active:scale-[0.98] group"
+                className="w-full h-12 bg-stone-900 hover:bg-black text-white font-black uppercase tracking-[0.2em] text-[10px] rounded-xl transition-all shadow-xl shadow-stone-900/10 mt-4 flex items-center justify-center active:scale-[0.98] group"
               >
-                {isLoading ? 'Provisioning...' : (
+                {isLoading ? 'Processing...' : (
                   <>
-                    <span>Begin Journey</span>
-                    <ArrowRight size={12} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    <span>Initialize Membership</span>
+                    <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
               </Button>
             </form>
 
-            <div className="text-center pt-2">
-              <p className="text-stone-400 font-bold text-[8px] uppercase tracking-[0.1em]">
-                Registered?{' '}
+            <div className="text-center pt-4">
+              <p className="text-stone-400 font-bold text-[9px] uppercase tracking-[0.1em]">
+                Already a member?{' '}
                 <Link to="/login" className="text-emerald-600 hover:text-emerald-700 font-black transition-all underline underline-offset-4 decoration-emerald-500/20 hover:decoration-emerald-500">
-                  Sign In
+                  Authenticate Here
                 </Link>
               </p>
             </div>
           </div>
 
-          <div className="absolute bottom-6 text-[8px] font-black text-stone-200 uppercase tracking-[0.3em] text-center">
-            V1.0.0 • REGISTRATION
+          <div className="absolute bottom-6 text-[9px] font-black text-stone-200 uppercase tracking-[0.3em] text-center">
+            V1.0.0 • SECURE REGISTRATION
           </div>
         </div>
       </div>
