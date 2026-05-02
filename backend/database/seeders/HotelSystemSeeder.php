@@ -50,6 +50,15 @@ class HotelSystemSeeder extends Seeder
             ]
         );
 
+        User::updateOrCreate(
+            ['email' => 'guest@inntera.com'],
+            [
+                'name' => 'Default Guest',
+                'password' => Hash::make('guest123'),
+                'role' => 'guest',
+            ]
+        );
+
         $staffUser = User::updateOrCreate(
             ['email' => 'staff@gmail.com'],
             [
