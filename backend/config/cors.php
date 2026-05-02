@@ -13,7 +13,7 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'https://inntera-u4jo529e2-jaysons-projects-5e0cbb2a.vercel.app',
+        'https://inntera-ten.vercel.app',
         'http://localhost:3000',
         'http://localhost:5173',
         '*',
