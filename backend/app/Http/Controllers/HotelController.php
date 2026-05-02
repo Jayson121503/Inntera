@@ -76,9 +76,25 @@ class HotelController extends Controller
             'display_id' => 'HTL-' . strtoupper(bin2hex(random_bytes(4))),
             'country' => $validated['country'] ?? 'Philippines',
             'email' => $validated['email'] ?? 'contact@hotel.com',
+            'total_rooms' => 0,
+            'available_rooms' => 0,
         ]));
 
-        return response()->json(['success' => true, 'data' => $hotel], 201);
+        // Create Default Room Types for the new hotel
+        $defaultTypes = [
+            ['name' => 'Standard Single (1st Floor)', 'base_price' => 1200, 'max_occupancy' => 1, 'bed_type' => 'Single'],
+            ['name' => 'Standard Double (2nd Floor)', 'base_price' => 2500, 'max_occupancy' => 2, 'bed_type' => 'Double'],
+            ['name' => 'Deluxe Double (3rd Floor)', 'base_price' => 4500, 'max_occupancy' => 2, 'bed_type' => 'Double'],
+            ['name' => 'Executive Suite (4th Floor)', 'base_price' => 12000, 'max_occupancy' => 4, 'bed_type' => 'Double'],
+        ];
+
+        foreach ($defaultTypes as $type) {
+            $hotel->roomTypes()->create(array_merge($type, [
+                'description' => "Standard default {$type['name']} for {$hotel->name}",
+            ]));
+        }
+
+        return response()->json(['success' => true, 'data' => $hotel->load('roomTypes')], 201);
     }
 
     /**
