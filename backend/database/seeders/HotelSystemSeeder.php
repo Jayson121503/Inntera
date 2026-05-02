@@ -27,7 +27,7 @@ class HotelSystemSeeder extends Seeder
             ['email' => 'admin@inntera.com'],
             [
                 'name' => 'Admin User',
-                'password' => Hash::make('admin123'),
+                'password' => 'admin123',
                 'role' => 'admin',
             ]
         );
@@ -36,7 +36,7 @@ class HotelSystemSeeder extends Seeder
             ['email' => 'manager@gmail.com'],
             [
                 'name' => 'General Manager',
-                'password' => Hash::make('manager123'),
+                'password' => 'manager123',
                 'role' => 'staff',
             ]
         );
@@ -45,7 +45,7 @@ class HotelSystemSeeder extends Seeder
             ['email' => 'jayson.velasco@urios.edu.ph'],
             [
                 'name' => 'Guest',
-                'password' => Hash::make('09685728496'),
+                'password' => '09685728496',
                 'role' => 'guest',
             ]
         );
@@ -54,7 +54,7 @@ class HotelSystemSeeder extends Seeder
             ['email' => 'guest@inntera.com'],
             [
                 'name' => 'Default Guest',
-                'password' => Hash::make('guest123'),
+                'password' => 'guest123',
                 'role' => 'guest',
             ]
         );
