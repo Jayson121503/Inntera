@@ -47,16 +47,27 @@ export function AdminRooms() {
     return matchesHotel && matchesFloor;
   });
 
+  const formatFloor = (num: string | number) => {
+    const n = parseInt(num.toString());
+    if (isNaN(n)) return num.toString();
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    const suffix = s[(v - 20) % 10] || s[v] || s[0];
+    return `${n}${suffix}`;
+  };
+
   const getNextRoomNumber = (hId: number, fl: string) => {
     const flNum = parseInt(fl);
-    const suffix = (n: number) => {
-      const s = ["th", "st", "nd", "rd"];
-      const v = n % 100;
-      return s[(v - 20) % 10] || s[v] || s[0];
-    };
-    const flStr = isNaN(flNum) ? fl : `${flNum}${suffix(flNum)}`;
+    if (isNaN(flNum)) return "";
     
-    const hotelRooms = rooms.filter(r => r.hotel_id === hId && (r.floor === fl || r.floor === flStr || r.floor === flNum.toString()));
+    // Normalize floor for comparison
+    const flFormatted = formatFloor(flNum);
+    
+    const hotelRooms = rooms.filter(r => 
+      r.hotel_id === hId && 
+      (r.floor === fl || r.floor === flFormatted || r.floor === flNum.toString())
+    );
+    
     if (hotelRooms.length === 0) return `${flNum}01`;
     const nums = hotelRooms.map(r => parseInt(r.room_number)).filter(n => !isNaN(n));
     if (nums.length === 0) return `${flNum}01`;
@@ -158,21 +169,31 @@ export function AdminRooms() {
                   <Select value={formData.room_type_id?.toString()} onValueChange={v => {
                     const typeId = parseInt(v);
                     const type = roomTypes.find(t => t.room_type_id === typeId);
-                    let newFloor = formData.floor;
+                    let newFloor = formData.floor || '';
                     
                     if (type) {
-                      const floorMatch = type.name.match(/(\d+)(?:st|nd|rd|th)\s+Floor/i);
+                      const floorMatch = type.name.match(/(\d+)(?:st|nd|rd|th)/i);
                       if (floorMatch) {
-                        newFloor = floorMatch[1];
+                        newFloor = formatFloor(floorMatch[1]);
                       }
                     }
+
+                    const nextNum = (formData.hotel_id && newFloor) ? getNextRoomNumber(formData.hotel_id, newFloor) : formData.room_number;
 
                     setFormData({ 
                       ...formData, 
                       room_type_id: typeId, 
                       floor: newFloor,
-                      room_number: (formData.hotel_id && newFloor) ? getNextRoomNumber(formData.hotel_id, newFloor) : formData.room_number 
+                      room_number: nextNum
                     });
+                    
+                    // Clear validation error for floor if it was set
+                    if (newFloor && validationErrors.floor) {
+                      setValidationErrors(prev => {
+                        const { floor, ...rest } = prev;
+                        return rest;
+                      });
+                    }
                   }} disabled={!formData.hotel_id}>
                     <SelectTrigger className="h-12 bg-white border border-slate-900 rounded-xl font-bold"> <SelectValue placeholder="Select" /> </SelectTrigger>
                     <SelectContent className="z-[201] rounded-xl bg-white backdrop-blur-none shadow-2xl"> {roomTypes.filter(t => t.hotel_id === formData.hotel_id).map(t => <SelectItem key={t.room_type_id} value={t.room_type_id.toString()}>{t.name}</SelectItem>)} </SelectContent>
@@ -187,10 +208,11 @@ export function AdminRooms() {
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase text-slate-900 ml-1">Floor</Label>
                   <Select value={formData.floor?.toString()} onValueChange={v => {
-                    setFormData({ ...formData, floor: v, room_number: formData.hotel_id ? getNextRoomNumber(formData.hotel_id, v) : '' });
+                    const formatted = formatFloor(v);
+                    setFormData({ ...formData, floor: formatted, room_number: formData.hotel_id ? getNextRoomNumber(formData.hotel_id, formatted) : '' });
                   }}>
-                    <SelectTrigger className="h-12 bg-white border border-slate-900 rounded-xl font-bold"> <SelectValue placeholder="Select" /> </SelectTrigger>
-                    <SelectContent className="z-[201] rounded-xl bg-white backdrop-blur-none shadow-2xl"> {[1, 2, 3, 4, 5, 6].map(f => <SelectItem key={f} value={f.toString()}>Level {f}</SelectItem>)} </SelectContent>
+                    <SelectTrigger className={`h-12 bg-white border rounded-xl font-bold ${validationErrors.floor ? 'border-rose-500' : 'border-slate-900'}`}> <SelectValue placeholder="Select" /> </SelectTrigger>
+                    <SelectContent className="z-[201] rounded-xl bg-white backdrop-blur-none shadow-2xl"> {[1, 2, 3, 4, 5, 6].map(f => <SelectItem key={f} value={formatFloor(f)}>Level {f} ({formatFloor(f)})</SelectItem>)} </SelectContent>
                   </Select>
                 </div>
               </div>
