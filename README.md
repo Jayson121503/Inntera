@@ -84,3 +84,4 @@ Explore our detailed guides for a deeper technical dive:
 <div align="center">
   <p>© 2026 Inntera Hotels Inc. | Enterprise Grade Hospitality</p>
 </div>
+
