@@ -257,6 +257,7 @@ class HotelSystemSeeder extends Seeder
                     Room::updateOrCreate(
                         ['hotel_id' => $hotel->id, 'room_number' => $roomNo],
                         [
+                            'hotel_name' => $hotel->name,
                             'room_type_id' => $rt->room_type_id,
                             'floor' => $floorDisplay,
                             'status' => 'available',
