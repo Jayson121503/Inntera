@@ -18,6 +18,10 @@ export function SignUpPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    phone: '',
+    address: '',
+    city: '',
+    country: 'Philippines',
   });
   
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -58,6 +62,10 @@ export function SignUpPage() {
       email: formData.email,
       password: formData.password,
       role,
+      phone: formData.phone,
+      address: formData.address,
+      city: formData.city,
+      country: formData.country,
     });
 
     if (result.success && result.user) {
@@ -178,9 +186,35 @@ export function SignUpPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Universal ID</Label>
+                <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Email Address</Label>
                 <Input name="email" type="email" placeholder="john@example.com" value={formData.email} onChange={handleInputChange} 
                   className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-1">
+                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Phone Number</Label>
+                  <Input name="phone" placeholder="09123456789" value={formData.phone} onChange={handleInputChange} 
+                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">City</Label>
+                  <Input name="city" placeholder="Butuan" value={formData.city} onChange={handleInputChange} 
+                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-1">
+                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Address</Label>
+                  <Input name="address" placeholder="123 Main St" value={formData.address} onChange={handleInputChange} 
+                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-[8px] font-black uppercase tracking-widest text-stone-500 ml-1">Country</Label>
+                  <Input name="country" placeholder="Philippines" value={formData.country} onChange={handleInputChange} 
+                    className="bg-stone-50 border-stone-200 text-stone-900 h-9 rounded-lg focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white transition-all font-bold px-3 text-xs border-2" />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2">

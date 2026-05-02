@@ -18,6 +18,10 @@ interface SignUpData {
   email: string;
   password: string;
   role: 'guest' | 'staff';
+  phone?: string;
+  address?: string;
+  city?: string;
+  country?: string;
 }
 
 interface AuthContextType {
@@ -110,6 +114,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: data.email,
         password: data.password,
         role: data.role,
+        phone: data.phone,
+        address: data.address,
+        city: data.city,
+        country: data.country,
       });
 
       if (response.success && response.data) {

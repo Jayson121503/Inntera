@@ -96,6 +96,10 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6',
             'role' => 'nullable|string|in:guest,staff',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
         ]);
 
         $role = $validated['role'] ?? 'guest';
@@ -113,6 +117,11 @@ class AuthController extends Controller
                 'name' => $validated['first_name'] . ' ' . $validated['last_name'],
                 'email' => $validated['email'],
                 'password' => $validated['password'],
+                'phone' => $validated['phone'] ?? null,
+                'address' => $validated['address'] ?? null,
+                'city' => $validated['city'] ?? null,
+                'country' => $validated['country'] ?? 'Philippines',
+                'role' => 'staff',
             ]);
 
             $hotel = \App\Models\Hotel::first();
@@ -143,6 +152,9 @@ class AuthController extends Controller
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
                 'password' => $validated['password'],
+                'phone' => $validated['phone'] ?? null,
+                'address' => $validated['address'] ?? null,
+                'status' => 'active',
             ]);
 
             return response()->json([
