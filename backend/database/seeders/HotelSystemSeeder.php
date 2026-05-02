@@ -22,7 +22,7 @@ class HotelSystemSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── Users (Admin + Staff) ──────────────────────────────
+        // ── Users (Base accounts) ──────────────────────────────
         $adminUser = User::updateOrCreate(
             ['email' => 'admin@inntera.com'],
             [
@@ -38,17 +38,6 @@ class HotelSystemSeeder extends Seeder
                 'name' => 'General Manager',
                 'password' => Hash::make('manager123'),
                 'role' => 'staff',
-            ]
-        );
-
-        // Ensure Staff record for GM exists
-        Staff::updateOrCreate(
-            ['user_id' => $managerUser->id],
-            [
-                'display_id' => 'STF-0000',
-                'hotel_id' => 1, // Linking to first hotel
-                'position' => 'Manager',
-                'hire_date' => now(),
             ]
         );
 
@@ -69,7 +58,6 @@ class HotelSystemSeeder extends Seeder
                 'role' => 'staff',
             ]
         );
-
 
         // ── Hotels (Butuan City Philippines) ──────────────────
         $hotelsData = [
@@ -142,6 +130,7 @@ class HotelSystemSeeder extends Seeder
             $amenities[] = Amenity::updateOrCreate(['name' => $a['name']], $a);
         }
 
+        // ── Main Hotel Loop ────────────────────────────────────
         foreach ($hotelsData as $index => $hData) {
             $hotel = Hotel::updateOrCreate(
                 ['email' => $hData['email']],
@@ -152,7 +141,20 @@ class HotelSystemSeeder extends Seeder
                 ])
             );
 
-            // Create 4 levels of room types for each hotel (1st to 4th floor)
+            // Special Case: Link the Global Manager to the First Hotel
+            if ($index === 0) {
+                Staff::updateOrCreate(
+                    ['user_id' => $managerUser->id],
+                    [
+                        'display_id' => 'STF-0000',
+                        'hotel_id' => $hotel->id,
+                        'position' => 'Manager',
+                        'hire_date' => now(),
+                    ]
+                );
+            }
+
+            // Create 4 levels of room types for each hotel
             $roomTypes = [
                 'standard_single' => RoomType::updateOrCreate(
                     ['hotel_id' => $hotel->id, 'name' => 'Standard Single (1st Floor)'],
@@ -196,8 +198,7 @@ class HotelSystemSeeder extends Seeder
                 ),
             ];
 
-            // Attach amenities to higher tier rooms
-            foreach ($roomTypes as $key => $rt) {
+            foreach ($roomTypes as $rt) {
                 $rt->amenities()->sync($amenities);
             }
 
@@ -235,7 +236,7 @@ class HotelSystemSeeder extends Seeder
                 }
             }
 
-            // Create 20 rooms across 4 floors for each hotel
+            // Create 20 rooms for each hotel
             for ($floor = 1; $floor <= 4; $floor++) {
                 $rt = match ($floor) {
                     1 => $roomTypes['standard_single'],
@@ -290,7 +291,7 @@ class HotelSystemSeeder extends Seeder
             ]
         );
 
-        // ── Sample Bookings with New Payment Methods ───────────
+        // ── Sample Bookings ────────────────────────────────────
         $allHotels = Hotel::all();
         $methods = ['gcash', 'paypal', 'paymaya', 'credit_card'];
 
