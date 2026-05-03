@@ -431,6 +431,10 @@ export const authService = {
     email: string;
     password: string;
     role: 'guest' | 'staff';
+    phone?: string;
+    address?: string;
+    city?: string;
+    country?: string;
   }): Promise<ApiResponse<AuthUser>> {
     return apiFetch<AuthUser>('/auth/signup', {
       method: 'POST',

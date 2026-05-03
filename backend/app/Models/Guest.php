@@ -34,6 +34,8 @@ class Guest extends Authenticatable
         'password',
         'phone',
         'address',
+        'city',
+        'country',
         'loyalty_member_id',
         'status',
     ];
