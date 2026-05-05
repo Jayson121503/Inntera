@@ -245,9 +245,10 @@ export const bookingService = {
   },
   
   async delete(id: number): Promise<ApiResponse<void>> {
-    return apiFetch<void>(`/bookings/${id}`, {
-      method: 'DELETE',
-    });
+    // Instead of deleting the record, we update the status to cancelled
+    // The backend apiResource excludes 'destroy', so DELETE is not supported.
+    const res = await this.updateStatus(id, 'cancelled');
+    return { success: res.success, error: res.error, data: undefined };
   },
 };
 

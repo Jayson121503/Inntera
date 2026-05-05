@@ -71,7 +71,23 @@ class Booking extends Model
     // Mutators
     public static function generateReference()
     {
-        $count = \App\Models\Booking::withTrashed()->count();
-        return 'BK-BTU-' . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+        // Find the most recent booking to get the last reference used
+        $lastBooking = self::withTrashed()
+            ->where('booking_reference', 'like', 'BK-BTU-%')
+            ->orderBy('booking_id', 'desc')
+            ->first();
+
+        // If no booking exists, start with 001
+        $nextId = 1;
+        if ($lastBooking && preg_match('/BK-BTU-(\d+)/', $lastBooking->booking_reference, $matches)) {
+            $nextId = (int)$matches[1] + 1;
+        }
+
+        // Double check for uniqueness to avoid collisions
+        do {
+            $reference = 'BK-BTU-' . str_pad($nextId++, 3, '0', STR_PAD_LEFT);
+        } while (self::withTrashed()->where('booking_reference', $reference)->exists());
+
+        return $reference;
     }
 }
